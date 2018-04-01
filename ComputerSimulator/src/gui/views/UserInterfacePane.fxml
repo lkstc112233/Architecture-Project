@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.control.cell.TextFieldListCell?>
+<?import java.net.URL?>
+
+<VBox xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="gui.controllers.UserInterfaceController"
+             spacing="10" styleClass="root">
+    <VBox styleClass="box" spacing="15">
+        <HBox>
+            <Label text="Printer:" styleClass="betterFont"/>
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Button fx:id="switch" text="    Switch " onAction="#Switch"/>
+        </HBox>
+        <TextArea fx:id="Printer"/>
+        <Label text="KeyBoard:"  styleClass="betterFont"/>
+        <HBox spacing="10">
+            <TextField fx:id="Input"/>
+            <Button text="Input" onAction="#input"/>
+        </HBox>
+        <Label text="Step Information:" styleClass="betterFont"/>
+        <TextField fx:id="StepInformation"/>
+    </VBox>
+    <GridPane hgap="12" vgap="10" styleClass="control_box">
+        <Button text=" Load P1 " onAction="#loadP1" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <Button text=" Load P2 " onAction="#loadP2" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+        <Button text="P2 Paragraph" onAction="#p2Paragraph" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+        <Button fx:id="runButton" text="    Run   " onAction="#Run" GridPane.rowIndex="0" GridPane.columnIndex="3" GridPane.rowSpan="2"/>
+        <Button text="   Memory  " onAction="#seeMemory" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <Button text="    Cache    " onAction="#seeCache" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+        <Button text="  Registers  " onAction="#seeRegisters" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+    </GridPane>
+
+    <stylesheets>
+        <URL value="@../css/Global.css"/>
+        <URL value="@../css/UserInterface.css"/>
+    </stylesheets>
+</VBox>

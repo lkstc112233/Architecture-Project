@@ -1,5 +1,6 @@
 package core;
-import gui.controllers.CenterPaneController;
+import gui.controllers.EngineerConsoleController;
+import gui.controllers.UserInterfaceController;
 /*DEVID	Device
         0	Console Keyboard
         1	Console Printer
@@ -11,7 +12,7 @@ public class IOinstructions extends ISA {
     //Input Character To Register from Device, r = 0..3
     public static void IN(){
         Halt.halt();
-        CenterPaneController.setStepInformation("Please enter a number",false);
+        EngineerConsoleController.setStepInformation("Please enter a number",false);
         Register r = null;
         //get the Register according to R
         switch (R){
@@ -21,10 +22,10 @@ public class IOinstructions extends ISA {
             case "11": r = cpu.getR3();break;
         }
         // c(r) <- IOmemory(DevID)
-        CenterPaneController.setStepInformation("Please Input Data!!!",false);
+        EngineerConsoleController.setStepInformation("Please Input Data!!!",false);
         Halt.halt();
         r.setContent(IOmemory.getInstance().getContent(DevID));
-        CenterPaneController.setStepInformation(r.getName()+"<-I/O",false);
+        EngineerConsoleController.setStepInformation(r.getName()+"<-I/O",false);
         CPU.cyclePlusOne();
         Halt.halt();
     }
@@ -40,12 +41,14 @@ public class IOinstructions extends ISA {
             case "11": r = cpu.getR3();break;
         }
         // c(r) <- IOmemory(DevID)
-        CenterPaneController.setStepInformation("Please Input Data!!!",false);
+        EngineerConsoleController.setStepInformation("Please Input Data!!!",false);
+        UserInterfaceController.setStepInformation("Please Input Data!");
         Halt.halt();
         r.setContent(IOmemory.getInstance().getContent(DevID));
-        CenterPaneController.setStepInformation(r.getName()+"<-I/O",false);
+        EngineerConsoleController.setStepInformation(r.getName()+"<-I/O",false);
         CPU.cyclePlusOne();
-        CenterPaneController.setStepInformation("Input success, press \"Next\" to continue!!!",false);
+        EngineerConsoleController.setStepInformation("Input success, press \"Next\" to continue!!!",false);
+        UserInterfaceController.setStepInformation("Input success, press \"Run\" to continue!!!");
         Halt.halt();
     }
     
@@ -62,7 +65,7 @@ public class IOinstructions extends ISA {
         }
         // IOmemory(DevID)<-c(r)
         IOmemory.getInstance().setContent(DevID,r.getContent());
-        CenterPaneController.setStepInformation("I/0<-"+r.getName(),false);
+        EngineerConsoleController.setStepInformation(r.getName()+"<-I/0",false);
         CPU.cyclePlusOne();
         Halt.halt();
     }
@@ -82,4 +85,39 @@ public class IOinstructions extends ISA {
         CPU.cyclePlusOne();
         
     }
+
+    //*************************************************************************************************************************
+//  Check device status
+
+    public static void CHK(){
+        Register r = null;
+        //get the Register according to R
+        switch (R){
+            case "00": r = cpu.getR0(); break;
+            case "01": r = cpu.getR1();break;
+            case "10": r = cpu.getR2();break;
+            case "11": r = cpu.getR3();break;
+        }
+        // c(r) <- IOmemorystatus(DevID)
+        r.setContent(IOmemory.getInstance().getStatus(DevID));
+        EngineerConsoleController.setStepInformation("I/0->"+r.getName(),false);
+        CPU.cyclePlusOne();
+        Halt.halt();
+    }
+    //Output without halt
+    public static void CHKNHLT(){
+        Register r = null;
+        //get the Register according to R
+        switch (R){
+            case "00": r = cpu.getR0(); break;
+            case "01": r = cpu.getR1();break;
+            case "10": r = cpu.getR2();break;
+            case "11": r = cpu.getR3();break;
+        }
+        // c(r) <- IOmemorystatus(DevID)
+        r.setContent(IOmemory.getInstance().getStatus(DevID));
+    }
+
+
+
 }

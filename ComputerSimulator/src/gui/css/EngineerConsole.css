@@ -1,0 +1,96 @@
+/*main*/
+.root {
+    -fx-background-color: -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 5, 4, 3;
+    -fx-padding: 20;
+}
+
+.info_box {
+    -fx-padding: 10;
+    -fx-min-width: 345;
+    -fx-max-width: 345;
+    -fx-min-height: 115;
+    -fx-max-height: 115;
+}
+
+
+
+/*Control Box*/
+.control_box {
+    -fx-font-family: "Arial";
+    -fx-font-size: 12;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1;
+    -fx-border-radius: 3, 2;
+}
+
+/*Info Box*/
+.center_box {
+    -fx-font-family: "Arial";
+    -fx-font-size: 12;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1;
+    -fx-border-radius: 3, 2;
+    -fx-pref-height: 200;
+}
+
+.info_show {
+    -fx-min-height: 70;
+}
+
+#Printer {
+    -fx-min-height: 100;
+}
+
+#Keyboard {
+    -fx-padding: 15 0 0 0;
+}
+
+/*Registers Box*/
+.registers_box {
+    -fx-padding: 10;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1;
+    -fx-border-radius: 3, 2;
+}
+
+.boldLabel {
+    -fx-font-size: 20px;
+    -fx-font-family: "Arial Black";
+    -fx-fill: #818181;
+    /*-fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );*/
+}
+
+/*Memory Box*/
+.memory_box {
+    -fx-padding: 10 32;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1;
+    -fx-border-radius: 3, 2;
+}
+
+
+.center_grid {
+    -fx-padding: 10 10;
+}
+
+
+
+.stepInformation {
+    -fx-min-width: 30px;
+}
+
+IO {
+    -fx-padding: 0 20;
+}
+
+.normalButton {
+    -fx-pref-width: 110;
+    -fx-pref-height: 23;
+}
+
+.bigButton {
+    -fx-pref-width: 100;
+    -fx-pref-height: 70;
+}

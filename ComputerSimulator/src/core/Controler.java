@@ -1,5 +1,6 @@
 package core;
-import gui.controllers.CenterPaneController;
+import gui.controllers.EngineerConsoleController;
+import gui.controllers.UserInterfaceController;
 
 public class Controler {
     //Singleton Pattern
@@ -11,8 +12,11 @@ public class Controler {
     //if hlt == true halt the process
     public boolean hlt = false;
     //Flag single step, if true, execute with single step
-    public boolean singleStep = true;
+    public boolean singleStep = false;
     public boolean end = false;
+    public boolean trap = false;
+    public boolean fault = false;
+    
     public static Controler getInstance() {
         return instance;
     }
@@ -24,11 +28,13 @@ public class Controler {
         //MAR = PC
         hlt = false;
         while(true){
+            //if fault handled then junmp back
+            if(fault) FaultHandler.getInstance().backAfterHandle();
             //initialize jump
             jump = false;
             stepInformation=("Instruction Fetch:MAR<=PC");
             CPU.getInstance().getCC().setContent("0000");
-            CenterPaneController.instructionNum++;//Monitor shows what instruction is processing
+            EngineerConsoleController.instructionNum++;//Monitor shows what instruction is processing
             CPU.getInstance().getMAR().setContent(CPU.getInstance().getPC().getContent());
             sendStepInformation();
             CPU.cyclePlusOne();
@@ -79,7 +85,7 @@ public class Controler {
                 Halt.halt();
             }
         }
-        CenterPaneController.setStepInformation("Execute done, press next to exit", false);
+        EngineerConsoleController.setStepInformation("Execute done, press next to exit", false);
         this.end = true;
         Halt.halt();
     }
@@ -94,7 +100,7 @@ public class Controler {
         		//Halt.halt();
             jump = false;
             CPU.getInstance().getCC().setContent("0000");
-        		CenterPaneController.instructionNum++;//Monitor shows what instruction is processing
+        		EngineerConsoleController.instructionNum++;//Monitor shows what instruction is processing
             CPU.getInstance().getMAR().setContent(CPU.getInstance().getPC().getContent());
             CPU.cyclePlusOne();
 
@@ -130,12 +136,13 @@ public class Controler {
                 CPU.cyclePlusOne();
             }
         }
-        CenterPaneController.setStepInformation("Execute done, press next to exit", false);
         this.end = true;
+        EngineerConsoleController.setStepInformation("Execute done", false);
+        UserInterfaceController.setStepInformation("Execute done, press next to see result");
         Halt.halt();
     }
     public void sendStepInformation(){
-        CenterPaneController.setStepInformation(stepInformation,false);
+        EngineerConsoleController.setStepInformation(stepInformation,false);
     }
 
 }
